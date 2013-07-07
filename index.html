@@ -1,6 +1,6 @@
 
 <!DOCTYPE HTML>
-<html><head><meta charset="UTF-8"><title>Varos Demo</title><style type="text/css">a:link {text-decoration: none; color: rgb(15,102,230);}a:visited {text-decoration: none}a:active {text-decoration: none}a:hover {text-decoration: underline;color: rgb(234,21,122);}</style></head><body><script type="text/javascript" src="elm-mini.js"></script><script type="text/javascript">
+<html><head><meta charset="UTF-8"><title>Compiled Elm</title><style type="text/css">a:link {text-decoration: none; color: rgb(15,102,230);}a:visited {text-decoration: none}a:active {text-decoration: none}a:hover {text-decoration: underline;color: rgb(234,21,122);}</style></head><body><script type="text/javascript" src="elm-mini.js"></script><script type="text/javascript">
 Elm.Main = function(elm){
   var N = Elm.Native, _N = N.Utils(elm), _L = N.List(elm), _E = N.Error(elm), _str = N.JavaScript(elm).toString;
   var $op = {};
@@ -13,84 +13,65 @@ Elm.Main = function(elm){
   var _ = Elm.Graphics.Element(elm); var Graphics = Graphics||{};Graphics.Element = _; var hiding={}; for(var k in _){if(k in hiding)continue;eval('var '+k+'=_["'+k+'"]')}
   var _ = Elm.Color(elm); var Color = _; var hiding={}; for(var k in _){if(k in hiding)continue;eval('var '+k+'=_["'+k+'"]')}
   var _ = Elm.Graphics.Collage(elm); var Graphics = Graphics||{};Graphics.Collage = _; var hiding={}; for(var k in _){if(k in hiding)continue;eval('var '+k+'=_["'+k+'"]')}
-  var _ = Elm.Keyboard(elm); var Keyboard = _;
-  var sawsin_9 = function(x_21){
-    return ((_N.cmp(A2(modF_13, x_21, (4*pi)),(2*pi)).ctor==='LT') ? saw_10(x_21) : cos((pi+x_21)));};
-  var saw_10 = function(x_22){
-    return (((A2(modF_13, toFloat(x_22), (2*pi))/pi)-1)*1.5);};
-  var triangle_11 = function(x_23){
+  var saw_8 = function(x_16){
+    return ((A2(modF_10, toFloat(x_16), (2*pi))/pi)-1);};
+  var triangle_9 = function(x_17){
     return function(){
-      var w_24 = (2*saw_10(x_23));
-      return ((_N.cmp(w_24,0).ctor==='LT') ? (w_24+1) : (1-w_24));}();};
-  var const_12 = function(x_25){
-    return 0;};
-  var modF_13 = F2(function(x_26, y_27){
+      var w_18 = (2*saw_8(x_17));
+      return ((_N.cmp(w_18,0).ctor==='LT') ? (w_18+1) : (1-w_18));}();};
+  var modF_10 = F2(function(x_19, y_20){
     return function(){
-      var d_28 = round(((x_26/y_27)-0.5));
-      return (x_26-(d_28*y_27));}();});
-  var scale_14 = F3(function(start_29, end_30, n_31){
+      var d_21 = round(((x_19/y_20)-0.5));
+      return (x_19-(d_21*y_20));}();});
+  var scale_11 = F3(function(start_22, end_23, n_24){
     return function(){
-      var len_32 = (end_30-start_29);
-      var step_33 = (toFloat(len_32)/toFloat((n_31-1)));
-      return A2(map, function(i_34){
-        return ((toFloat(i_34)*step_33)+start_29);}, _L.range(0,(n_31-1)));}();});
-  var waveshape_15 = F8(function(r_35, rippleAmp_36, rippleF_37, n_38, delta_39, colour_40, maxR_41, waveform_42){
+      var len_25 = (end_23-start_22);
+      var step_26 = (toFloat(len_25)/toFloat((n_24-1)));
+      return A2(map, function(i_27){
+        return ((toFloat(i_27)*step_26)+start_22);}, _L.range(0,(n_24-1)));}();});
+  var waveshape_12 = F7(function(r_28, rippleAmp_29, rippleF_30, n_31, delta_32, colour_33, maxR_34){
     return function(){
-      var circ_43 = A2(map, function(alpha_46){
-        return {ctor:"Tuple2", _0:cos(alpha_46), _1:sin(alpha_46)};}, A3(scale_14, 0, (2*pi), (1+n_38)));
-      var rs_44 = A2(map, function(rr_50){
-        return ((_N.cmp(rr_50,maxR_41).ctor==='LT') ? rr_50 : maxR_41);}, A2(map, function(x){
-        return function(rpl_47){
-          return (r_35+(rpl_47*rippleAmp_36));}(waveform_42((delta_39+x)));}, A3(scale_14, 0, ((2*pi)*rippleF_37), (1+n_38))));
-      var points_45 = A2(map, function(_0_51){
+      var circ_35 = A2(map, function(alpha_38){
+        return {ctor:"Tuple2", _0:cos(alpha_38), _1:sin(alpha_38)};}, A3(scale_11, 0, (2*pi), (1+n_31)));
+      var rs_36 = A2(map, function(rr_42){
+        return ((_N.cmp(rr_42,maxR_34).ctor==='LT') ? rr_42 : maxR_34);}, A2(map, function(x){
+        return function(rr_39){
+          return (r_28+(rr_39*rippleAmp_29));}(waveform_7((delta_32+x)));}, A3(scale_11, 0, ((2*pi)*rippleF_30), (1+n_31))));
+      var points_37 = A2(map, function(_0_43){
         return function(){ 
-        switch (_0_51.ctor) {
+        switch (_0_43.ctor) {
           case 'Tuple2':
-            switch (_0_51._0.ctor) {
+            switch (_0_43._0.ctor) {
               case 'Tuple2':
-                return {ctor:"Tuple2", _0:(_0_51._0._0*_0_51._1), _1:(_0_51._0._1*_0_51._1)};
+                return {ctor:"Tuple2", _0:(_0_43._0._0*_0_43._1), _1:(_0_43._0._1*_0_43._1)};
             }break;
-        }_E.Case('Line 44, Column 55') }();}, A2(zip, circ_43, rs_44));
-      return A2(filled, colour_40, polygon(points_45));}();});
-  var render_16 = F3(function(d_55, u_56, keys_57){
+        }_E.Case('Line 36, Column 55') }();}, A2(zip, circ_35, rs_36));
+      return A2(filled, colour_33, polygon(points_37));}();});
+  var render_13 = function(d_47){
     return function(){
-      var keyDown_58 = function(k_68){
-        return A2(any, function(x_69){
-          return _N.eq(x_69,k_68);}, keys_57);};
-      var city_67 = F3(function(units_70, _68000_71, pos_72){
+      var city_52 = F3(function(units_53, _50000_54, pos_55){
         return function(){ 
-        switch (_68000_71.ctor) {
+        switch (_50000_54.ctor) {
           case 'Tuple3':
-            return group(_L.Cons(A2(move, pos_72, A2(filled, white, circle(cityR_1))),_L.Cons(A2(move, pos_72, A8(waveshape_15, (rr_65*units_70), rippleAmp_63, rippleNum_0, 333, delta_66, A4(rgba, _68000_71._0, _68000_71._1, _68000_71._2, 0.5), 3333, waveform_62)),_L.Cons(A2(move, pos_72, A8(waveshape_15, (rr_65*units_70), rippleAmp_63, rippleNum_0, 333, delta_66, A3(rgb, _68000_71._0, _68000_71._1, _68000_71._2), cityR_1, waveform_62)),_L.Cons(A2(move, pos_72, A2(outlined, solid(grey), circle(cityR_1))),_L.Nil)))));
-        }_E.Case('Line 62, Column 36') }();});
-      var attack_59 = keyDown_58(attackKey_7);
-      var defend_60 = keyDown_58(defendKey_8);
-      var t_61 = (toFloat(d_55)*speed_4);
-      var waveform_62 = ((attack_59&&defend_60) ? sawsin_9 : (attack_59 ? saw_10 : (defend_60 ? sin : const_12)));
-      var rippleAmp_63 = ((sin(t_61)*amp_3)*u_56);
-      var effPulse_64 = ((attack_59||defend_60) ? pulse_5 : 0);
-      var rr_65 = (((effPulse_64*(2*cos(t_61)))*u_56)+u_56);
-      var delta_66 = (rot_6*t_61);
-      return A3(collage, 300, 400, _L.Cons(A2(rotate, 1, A2(filled, grey, A2(rect, 8, 200))),_L.Cons(A3(city_67, u_56, {ctor:"Tuple3", _0:248, _1:131, _2:121}, {ctor:"Tuple2", _0:0, _1:0}),_L.Nil)));}();});
-  var atleast0_18 = function(v_78){
-    return ((_N.cmp(v_78,0).ctor==='LT') ? 0 : v_78);};
+            return group(_L.Cons(A2(move, pos_55, A2(filled, white, circle(cityR_1))),_L.Cons(A2(move, pos_55, A7(waveshape_12, (rr_50*units_53), rippleAmp_49, rippleNum_0, 333, delta_51, A4(rgba, _50000_54._0, _50000_54._1, _50000_54._2, 0.5), 3333)),_L.Cons(A2(move, pos_55, A7(waveshape_12, (rr_50*units_53), rippleAmp_49, rippleNum_0, 333, delta_51, A3(rgb, _50000_54._0, _50000_54._1, _50000_54._2), cityR_1)),_L.Cons(A2(move, pos_55, A2(outlined, solid(grey), circle(cityR_1))),_L.Nil)))));
+        }_E.Case('Line 44, Column 36') }();});
+      var t_48 = (toFloat(d_47)*speed_4);
+      var rippleAmp_49 = ((sin(t_48)*amp_3)*r_2);
+      var rr_50 = (((pulse_5*(2*cos(t_48)))*r_2)+r_2);
+      var delta_51 = (rot_6*t_48);
+      return A3(collage, 300, 400, _L.Cons(A2(rotate, 1, A2(filled, grey, A2(rect, 8, 200))),_L.Cons(A3(city_52, 2.5, {ctor:"Tuple3", _0:248, _1:131, _2:121}, {ctor:"Tuple2", _0:0, _1:0}),_L.Nil)));}();};
   var rippleNum_0 = 10;
   var cityR_1 = 23;
   var r_2 = 15;
-  var amp_3 = 0.3;
+  var amp_3 = 0.1;
   var speed_4 = 4.0e-3;
-  var pulse_5 = 8.0e-3;
-  var rot_6 = 0.14;
-  var attackKey_7 = 65;
-  var defendKey_8 = 68;
-  var delta_17 = A3(foldp, function(x_76){
-    return function(y_77){
-      return (x_76+y_77);};}, 0, fps(50));
-  var unitsignal_19 = A3(foldp, function(t_79){
-    return function(acc_80){
-      return atleast0_18((acc_80+(t_79/10)));};}, 3, A2(lift,function(__81){
-    return __81.y;},Keyboard.arrows));
-  var main_20 = A4(lift3, render_16, delta_17, unitsignal_19, Keyboard.keysDown);
+  var pulse_5 = 1.0e-2;
+  var rot_6 = 0.1;
+  var waveform_7 = saw_8;
+  var delta_14 = A3(foldp, function(x_59){
+    return function(y_60){
+      return (x_59+y_60);};}, 0, fps(50));
+  var main_15 = A2(lift, render_13, delta_14);
   elm.Native = elm.Native||{};
   var _ = elm.Native.Main||{};
   _.$op = {};
@@ -101,20 +82,15 @@ Elm.Main = function(elm){
   _.speed = speed_4;
   _.pulse = pulse_5;
   _.rot = rot_6;
-  _.attackKey = attackKey_7;
-  _.defendKey = defendKey_8;
-  _.sawsin = sawsin_9;
-  _.saw = saw_10;
-  _.triangle = triangle_11;
-  _.const = const_12;
-  _.modF = modF_13;
-  _.scale = scale_14;
-  _.waveshape = waveshape_15;
-  _.render = render_16;
-  _.delta = delta_17;
-  _.atleast0 = atleast0_18;
-  _.unitsignal = unitsignal_19;
-  _.main = main_20
+  _.waveform = waveform_7;
+  _.saw = saw_8;
+  _.triangle = triangle_9;
+  _.modF = modF_10;
+  _.scale = scale_11;
+  _.waveshape = waveshape_12;
+  _.render = render_13;
+  _.delta = delta_14;
+  _.main = main_15
   return elm.Main = _;
   };</script><script type="text/javascript">Elm.fullscreen(Elm.Main)</script><script type="text/javascript">var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-25827182-1']);
