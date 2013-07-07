@@ -1,0 +1,126 @@
+
+<!DOCTYPE HTML>
+<html><head><meta charset="UTF-8"><title>Varos Demo</title><style type="text/css">a:link {text-decoration: none; color: rgb(15,102,230);}a:visited {text-decoration: none}a:active {text-decoration: none}a:hover {text-decoration: underline;color: rgb(234,21,122);}</style></head><body><script type="text/javascript" src="elm-mini.js"></script><script type="text/javascript">
+Elm.Main = function(elm){
+  var N = Elm.Native, _N = N.Utils(elm), _L = N.List(elm), _E = N.Error(elm), _str = N.JavaScript(elm).toString;
+  var $op = {};
+  var _ = Elm.Text(elm); var Text = _; var hiding={link:1, color:1, height:1}; for(var k in _){if(k in hiding)continue;eval('var '+k+'=_["'+k+'"]')}
+  var _ = Elm.Prelude(elm); var Prelude = _; var hiding={}; for(var k in _){if(k in hiding)continue;eval('var '+k+'=_["'+k+'"]')}
+  var _ = Elm.Signal(elm); var Signal = _; var hiding={}; for(var k in _){if(k in hiding)continue;eval('var '+k+'=_["'+k+'"]')}
+  var _ = Elm.List(elm); var List = _; var hiding={}; for(var k in _){if(k in hiding)continue;eval('var '+k+'=_["'+k+'"]')}
+  var _ = Elm.Maybe(elm); var Maybe = _; var hiding={}; for(var k in _){if(k in hiding)continue;eval('var '+k+'=_["'+k+'"]')}
+  var _ = Elm.Time(elm); var Time = _; var hiding={}; for(var k in _){if(k in hiding)continue;eval('var '+k+'=_["'+k+'"]')}
+  var _ = Elm.Graphics.Element(elm); var Graphics = Graphics||{};Graphics.Element = _; var hiding={}; for(var k in _){if(k in hiding)continue;eval('var '+k+'=_["'+k+'"]')}
+  var _ = Elm.Color(elm); var Color = _; var hiding={}; for(var k in _){if(k in hiding)continue;eval('var '+k+'=_["'+k+'"]')}
+  var _ = Elm.Graphics.Collage(elm); var Graphics = Graphics||{};Graphics.Collage = _; var hiding={}; for(var k in _){if(k in hiding)continue;eval('var '+k+'=_["'+k+'"]')}
+  var _ = Elm.Keyboard(elm); var Keyboard = _;
+  var sawsin_9 = function(x_21){
+    return ((_N.cmp(A2(modF_13, x_21, (4*pi)),(2*pi)).ctor==='LT') ? saw_10(x_21) : cos((pi+x_21)));};
+  var saw_10 = function(x_22){
+    return (((A2(modF_13, toFloat(x_22), (2*pi))/pi)-1)*1.5);};
+  var triangle_11 = function(x_23){
+    return function(){
+      var w_24 = (2*saw_10(x_23));
+      return ((_N.cmp(w_24,0).ctor==='LT') ? (w_24+1) : (1-w_24));}();};
+  var const_12 = function(x_25){
+    return 0;};
+  var modF_13 = F2(function(x_26, y_27){
+    return function(){
+      var d_28 = round(((x_26/y_27)-0.5));
+      return (x_26-(d_28*y_27));}();});
+  var scale_14 = F3(function(start_29, end_30, n_31){
+    return function(){
+      var len_32 = (end_30-start_29);
+      var step_33 = (toFloat(len_32)/toFloat((n_31-1)));
+      return A2(map, function(i_34){
+        return ((toFloat(i_34)*step_33)+start_29);}, _L.range(0,(n_31-1)));}();});
+  var waveshape_15 = F8(function(r_35, rippleAmp_36, rippleF_37, n_38, delta_39, colour_40, maxR_41, waveform_42){
+    return function(){
+      var circ_43 = A2(map, function(alpha_46){
+        return {ctor:"Tuple2", _0:cos(alpha_46), _1:sin(alpha_46)};}, A3(scale_14, 0, (2*pi), (1+n_38)));
+      var rs_44 = A2(map, function(rr_50){
+        return ((_N.cmp(rr_50,maxR_41).ctor==='LT') ? rr_50 : maxR_41);}, A2(map, function(x){
+        return function(rpl_47){
+          return (r_35+(rpl_47*rippleAmp_36));}(waveform_42((delta_39+x)));}, A3(scale_14, 0, ((2*pi)*rippleF_37), (1+n_38))));
+      var points_45 = A2(map, function(_0_51){
+        return function(){ 
+        switch (_0_51.ctor) {
+          case 'Tuple2':
+            switch (_0_51._0.ctor) {
+              case 'Tuple2':
+                return {ctor:"Tuple2", _0:(_0_51._0._0*_0_51._1), _1:(_0_51._0._1*_0_51._1)};
+            }break;
+        }_E.Case('Line 44, Column 55') }();}, A2(zip, circ_43, rs_44));
+      return A2(filled, colour_40, polygon(points_45));}();});
+  var render_16 = F3(function(d_55, u_56, keys_57){
+    return function(){
+      var keyDown_58 = function(k_68){
+        return A2(any, function(x_69){
+          return _N.eq(x_69,k_68);}, keys_57);};
+      var city_67 = F3(function(units_70, _68000_71, pos_72){
+        return function(){ 
+        switch (_68000_71.ctor) {
+          case 'Tuple3':
+            return group(_L.Cons(A2(move, pos_72, A2(filled, white, circle(cityR_1))),_L.Cons(A2(move, pos_72, A8(waveshape_15, (rr_65*units_70), rippleAmp_63, rippleNum_0, 333, delta_66, A4(rgba, _68000_71._0, _68000_71._1, _68000_71._2, 0.5), 3333, waveform_62)),_L.Cons(A2(move, pos_72, A8(waveshape_15, (rr_65*units_70), rippleAmp_63, rippleNum_0, 333, delta_66, A3(rgb, _68000_71._0, _68000_71._1, _68000_71._2), cityR_1, waveform_62)),_L.Cons(A2(move, pos_72, A2(outlined, solid(grey), circle(cityR_1))),_L.Nil)))));
+        }_E.Case('Line 62, Column 36') }();});
+      var attack_59 = keyDown_58(attackKey_7);
+      var defend_60 = keyDown_58(defendKey_8);
+      var t_61 = (toFloat(d_55)*speed_4);
+      var waveform_62 = ((attack_59&&defend_60) ? sawsin_9 : (attack_59 ? saw_10 : (defend_60 ? sin : const_12)));
+      var rippleAmp_63 = ((sin(t_61)*amp_3)*u_56);
+      var effPulse_64 = ((attack_59||defend_60) ? pulse_5 : 0);
+      var rr_65 = (((effPulse_64*(2*cos(t_61)))*u_56)+u_56);
+      var delta_66 = (rot_6*t_61);
+      return A3(collage, 300, 400, _L.Cons(A2(rotate, 1, A2(filled, grey, A2(rect, 8, 200))),_L.Cons(A3(city_67, u_56, {ctor:"Tuple3", _0:248, _1:131, _2:121}, {ctor:"Tuple2", _0:0, _1:0}),_L.Nil)));}();});
+  var atleast0_18 = function(v_78){
+    return ((_N.cmp(v_78,0).ctor==='LT') ? 0 : v_78);};
+  var rippleNum_0 = 10;
+  var cityR_1 = 23;
+  var r_2 = 15;
+  var amp_3 = 0.3;
+  var speed_4 = 4.0e-3;
+  var pulse_5 = 8.0e-3;
+  var rot_6 = 0.14;
+  var attackKey_7 = 65;
+  var defendKey_8 = 68;
+  var delta_17 = A3(foldp, function(x_76){
+    return function(y_77){
+      return (x_76+y_77);};}, 0, fps(50));
+  var unitsignal_19 = A3(foldp, function(t_79){
+    return function(acc_80){
+      return atleast0_18((acc_80+(t_79/10)));};}, 3, A2(lift,function(__81){
+    return __81.y;},Keyboard.arrows));
+  var main_20 = A4(lift3, render_16, delta_17, unitsignal_19, Keyboard.keysDown);
+  elm.Native = elm.Native||{};
+  var _ = elm.Native.Main||{};
+  _.$op = {};
+  _.rippleNum = rippleNum_0;
+  _.cityR = cityR_1;
+  _.r = r_2;
+  _.amp = amp_3;
+  _.speed = speed_4;
+  _.pulse = pulse_5;
+  _.rot = rot_6;
+  _.attackKey = attackKey_7;
+  _.defendKey = defendKey_8;
+  _.sawsin = sawsin_9;
+  _.saw = saw_10;
+  _.triangle = triangle_11;
+  _.const = const_12;
+  _.modF = modF_13;
+  _.scale = scale_14;
+  _.waveshape = waveshape_15;
+  _.render = render_16;
+  _.delta = delta_17;
+  _.atleast0 = atleast0_18;
+  _.unitsignal = unitsignal_19;
+  _.main = main_20
+  return elm.Main = _;
+  };</script><script type="text/javascript">Elm.fullscreen(Elm.Main)</script><script type="text/javascript">var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-25827182-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();</script></body></html>
