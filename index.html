@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="UTF-8"><title>msgame_v5.1</title><script type="text/javascript" src="elm-runtime.js"></script><script type="text/javascript">Elm.Main = Elm.Main || {};
+<html><head><meta charset="UTF-8"><title>msgame_v5.2</title><script type="text/javascript" src="elm-runtime.js"></script><script type="text/javascript">Elm.Main = Elm.Main || {};
 Elm.Main.make = function (_elm) {
    _elm.Main = _elm.Main || {};
    if (_elm.Main.values)
@@ -68,7 +68,7 @@ Elm.Main.make = function (_elm) {
                      return Basics.not(_N.eq(a1,
                        _v2._0));}
                   _E.Case($moduleName,
-                  "on line 254, column 49 to 62");
+                  "on line 268, column 49 to 62");
                }();
             });
          };
@@ -90,7 +90,7 @@ Elm.Main.make = function (_elm) {
                {case "_Tuple2":
                   return isUserCity(_v6._0);}
                _E.Case($moduleName,
-               "on line 267, column 28 to 40");
+               "on line 281, column 28 to 40");
             }();
          });
          var sendCommand = function () {
@@ -127,7 +127,7 @@ Elm.Main.make = function (_elm) {
                case "Nothing":
                return Basics.id;}
             _E.Case($moduleName,
-            "between lines 261 and 266");
+            "between lines 275 and 280");
          }();
          var applyCommand = function () {
             switch (sendCommand.ctor)
@@ -149,7 +149,7 @@ Elm.Main.make = function (_elm) {
                case "Nothing":
                return Basics.id;}
             _E.Case($moduleName,
-            "between lines 257 and 260");
+            "between lines 271 and 274");
          }();
          return removeAIArrows(applyStop(applyCommand(arrows)));
       }();
@@ -166,7 +166,7 @@ Elm.Main.make = function (_elm) {
             case "[]":
             return Maybe.Nothing;}
          _E.Case($moduleName,
-         "between lines 121 and 123");
+         "between lines 135 and 137");
       }();
    };
    var roads = _J.toList([{ctor: "_Tuple2"
@@ -174,10 +174,14 @@ Elm.Main.make = function (_elm) {
                           ,_1: 2}
                          ,{ctor: "_Tuple2",_0: 2,_1: 3}
                          ,{ctor: "_Tuple2",_0: 1,_1: 4}
-                         ,{ctor: "_Tuple2",_0: 3,_1: 5}
+                         ,{ctor: "_Tuple2",_0: 3,_1: 6}
+                         ,{ctor: "_Tuple2",_0: 4,_1: 5}
+                         ,{ctor: "_Tuple2",_0: 5,_1: 6}
+                         ,{ctor: "_Tuple2",_0: 4,_1: 7}
+                         ,{ctor: "_Tuple2",_0: 7,_1: 8}
                          ,{ctor: "_Tuple2"
-                          ,_0: 4
-                          ,_1: 5}]);
+                          ,_0: 6
+                          ,_1: 8}]);
    var roadExists = function (_v26) {
       return function () {
          switch (_v26.ctor)
@@ -200,7 +204,7 @@ Elm.Main.make = function (_elm) {
                             ,_0: _v30._1
                             ,_1: _v30._0}));}
                        _E.Case($moduleName,
-                       "between lines 148 and 150");
+                       "between lines 162 and 164");
                     }();
                  });
                  return A3(List.foldl,
@@ -209,7 +213,7 @@ Elm.Main.make = function (_elm) {
                  roads);
               }();}
          _E.Case($moduleName,
-         "between lines 148 and 151");
+         "between lines 162 and 165");
       }();
    };
    var neighbours = function () {
@@ -238,7 +242,7 @@ Elm.Main.make = function (_elm) {
                  _v34._0,
                  _v34._1)(dict));}
             _E.Case($moduleName,
-            "between lines 100 and 101");
+            "between lines 114 and 115");
          }();
       });
       return A3(List.foldl,
@@ -282,7 +286,7 @@ Elm.Main.make = function (_elm) {
                                                        ,_1: _v38._1};
                     }();}
                _E.Case($moduleName,
-               "between lines 206 and 209");
+               "between lines 220 and 223");
             }();
          });
          return function (_v42) {
@@ -291,7 +295,7 @@ Elm.Main.make = function (_elm) {
                {case "_Tuple2":
                   return _v42._0;}
                _E.Case($moduleName,
-               "on line 212, column 62 to 66");
+               "on line 226, column 62 to 66");
             }();
          }(A3(List.foldl,
          acc,
@@ -330,7 +334,7 @@ Elm.Main.make = function (_elm) {
                        unitsOf(city) * 0.6) < 0;
                      case "Nothing": return false;}
                   _E.Case($moduleName,
-                  "between lines 231 and 234");
+                  "between lines 245 and 248");
                }();
                var enemies = List.filter(function (a) {
                   return Basics.not(_N.eq(ownerOf(a),
@@ -344,7 +348,7 @@ Elm.Main.make = function (_elm) {
                        unitsOf(city) * 0.7) < 0;
                      case "Nothing": return false;}
                   _E.Case($moduleName,
-                  "between lines 234 and 237");
+                  "between lines 248 and 251");
                }();
                return function () {
                   var _v50 = {ctor: "_Tuple4"
@@ -381,7 +385,7 @@ Elm.Main.make = function (_elm) {
                {case "_Tuple2":
                   return _v61._0;}
                _E.Case($moduleName,
-               "on line 219, column 51 to 52");
+               "on line 233, column 51 to 52");
             }();
          })(List.filter(function (_v57) {
             return function () {
@@ -390,7 +394,7 @@ Elm.Main.make = function (_elm) {
                   return Basics.not(_N.eq(_v57._1,
                     userFaction));}
                _E.Case($moduleName,
-               "on line 218, column 51 to 72");
+               "on line 232, column 51 to 72");
             }();
          })(Dict.toList(cityOwners)));
          return List.concat(List.map(arrowForCity)(aiCities));
@@ -418,7 +422,7 @@ Elm.Main.make = function (_elm) {
                                                        ,_1: _v65._1};
                     }();}
                _E.Case($moduleName,
-               "between lines 196 and 199");
+               "between lines 210 and 213");
             }();
          });
          return function (_v69) {
@@ -427,7 +431,7 @@ Elm.Main.make = function (_elm) {
                {case "_Tuple2":
                   return _v69._0;}
                _E.Case($moduleName,
-               "on line 202, column 48 to 52");
+               "on line 216, column 48 to 52");
             }();
          }(A3(List.foldl,
          acc,
@@ -476,30 +480,48 @@ Elm.Main.make = function (_elm) {
                                                            ,_1: 1}
                                                           ,{ctor: "_Tuple2"
                                                            ,_0: 3
-                                                           ,_1: 2}
+                                                           ,_1: 1}
                                                           ,{ctor: "_Tuple2"
                                                            ,_0: 4
-                                                           ,_1: 2}
+                                                           ,_1: 1}
                                                           ,{ctor: "_Tuple2"
                                                            ,_0: 5
+                                                           ,_1: 2}
+                                                          ,{ctor: "_Tuple2"
+                                                           ,_0: 6
+                                                           ,_1: 2}
+                                                          ,{ctor: "_Tuple2"
+                                                           ,_0: 7
+                                                           ,_1: 2}
+                                                          ,{ctor: "_Tuple2"
+                                                           ,_0: 8
                                                            ,_1: 2}]))
                      ,roundCount: 0
                      ,selectedCity: Maybe.Nothing
                      ,time: 0
                      ,units: Dict.fromList(_J.toList([{ctor: "_Tuple2"
                                                       ,_0: 1
-                                                      ,_1: Basics.toFloat(177)}
+                                                      ,_1: Basics.toFloat(196)}
                                                      ,{ctor: "_Tuple2"
                                                       ,_0: 2
-                                                      ,_1: Basics.toFloat(140)}
+                                                      ,_1: Basics.toFloat(160)}
                                                      ,{ctor: "_Tuple2"
                                                       ,_0: 3
-                                                      ,_1: Basics.toFloat(70)}
+                                                      ,_1: Basics.toFloat(80)}
                                                      ,{ctor: "_Tuple2"
                                                       ,_0: 4
-                                                      ,_1: Basics.toFloat(20)}
+                                                      ,_1: Basics.toFloat(60)}
                                                      ,{ctor: "_Tuple2"
                                                       ,_0: 5
+                                                      ,_1: Basics.toFloat(130)}
+                                                     ,{ctor: "_Tuple2"
+                                                      ,_0: 6
+                                                      ,_1: Basics.toFloat(130)}
+                                                     ,{ctor: "_Tuple2"
+                                                      ,_0: 7
+                                                      ,_1: Basics.toFloat(130)}
+                                                     ,{ctor: "_Tuple2"
+                                                      ,_0: 8
                                                       ,_1: Basics.toFloat(130)}]))
                      ,userArrows: _J.toList([])};
    var createTransform = F2(function (w,
@@ -538,13 +560,22 @@ Elm.Main.make = function (_elm) {
                                   ,_1: {_: {},x: 100,y: 200}}
                                  ,{ctor: "_Tuple2"
                                   ,_0: 3
-                                  ,_1: {_: {},x: 250,y: 200}}
+                                  ,_1: {_: {},x: 150,y: 320}}
                                  ,{ctor: "_Tuple2"
                                   ,_0: 4
-                                  ,_1: {_: {},x: 350,y: 80}}
+                                  ,_1: {_: {},x: 300,y: 80}}
                                  ,{ctor: "_Tuple2"
                                   ,_0: 5
-                                  ,_1: {_: {},x: 400,y: 200}}]);
+                                  ,_1: {_: {},x: 290,y: 200}}
+                                 ,{ctor: "_Tuple2"
+                                  ,_0: 6
+                                  ,_1: {_: {},x: 320,y: 320}}
+                                 ,{ctor: "_Tuple2"
+                                  ,_0: 7
+                                  ,_1: {_: {},x: 450,y: 100}}
+                                 ,{ctor: "_Tuple2"
+                                  ,_0: 8
+                                  ,_1: {_: {},x: 450,y: 280}}]);
    var getCityPos = function (city) {
       return function (_v80) {
          return function () {
@@ -552,7 +583,7 @@ Elm.Main.make = function (_elm) {
             {case "_Tuple2":
                return _v80._1;}
             _E.Case($moduleName,
-            "on line 137, column 17 to 18");
+            "on line 151, column 17 to 18");
          }();
       }(List.head(List.filter(function (_v76) {
          return function () {
@@ -560,7 +591,7 @@ Elm.Main.make = function (_elm) {
             {case "_Tuple2":
                return _N.eq(_v76._0,city);}
             _E.Case($moduleName,
-            "on line 135, column 25 to 34");
+            "on line 149, column 25 to 34");
          }();
       })(cityPositions)));
    };
@@ -590,7 +621,7 @@ Elm.Main.make = function (_elm) {
                  line);
               }();}
          _E.Case($moduleName,
-         "between lines 411 and 416");
+         "between lines 425 and 430");
       }();
    };
    var roadsForm = Graphics.Collage.group(A2(List.map,
@@ -623,7 +654,7 @@ Elm.Main.make = function (_elm) {
                              city) && Basics.not(_N.eq(ownerOf(_v88._0),
                              owner));}
                         _E.Case($moduleName,
-                        "on line 325, column 63 to 99");
+                        "on line 339, column 63 to 99");
                      }();
                   })(arrows);
                   return _N.eq(List.length(attacks),
@@ -637,7 +668,7 @@ Elm.Main.make = function (_elm) {
                                 _v92._0,
                                 units);}
                            _E.Case($moduleName,
-                           "on line 328, column 71 to 101");
+                           "on line 342, column 71 to 101");
                         }();
                      })(attacks));
                      return function (_v100) {
@@ -646,7 +677,7 @@ Elm.Main.make = function (_elm) {
                            {case "_Tuple2":
                               return ownerOf(_v100._0);}
                            _E.Case($moduleName,
-                           "on line 332, column 55 to 64");
+                           "on line 346, column 55 to 64");
                         }();
                      }(List.head(List.filter(function (_v96) {
                         return function () {
@@ -658,7 +689,7 @@ Elm.Main.make = function (_elm) {
                                 units),
                                 maxUnits);}
                            _E.Case($moduleName,
-                           "on line 330, column 64 to 107");
+                           "on line 344, column 64 to 107");
                         }();
                      })(attacks)));
                   }();
@@ -684,7 +715,7 @@ Elm.Main.make = function (_elm) {
                     _v104._1,
                     p);}
                _E.Case($moduleName,
-               "on line 155, column 20 to 36");
+               "on line 169, column 20 to 36");
             }();
          };
          var matches = List.filter(f)(cityPositions);
@@ -698,7 +729,7 @@ Elm.Main.make = function (_elm) {
                case "[]":
                return Maybe.Nothing;}
             _E.Case($moduleName,
-            "between lines 157 and 159");
+            "between lines 171 and 173");
          }();
       }();
    };
@@ -712,7 +743,7 @@ Elm.Main.make = function (_elm) {
                case "Nothing":
                return Maybe.Nothing;}
             _E.Case($moduleName,
-            "between lines 179 and 180");
+            "between lines 193 and 194");
          }();
       }();
    };
@@ -726,7 +757,7 @@ Elm.Main.make = function (_elm) {
                case "Nothing":
                return Maybe.Nothing;}
             _E.Case($moduleName,
-            "between lines 172 and 174");
+            "between lines 186 and 188");
          }();
       }();
    };
@@ -806,7 +837,7 @@ Elm.Main.make = function (_elm) {
                       getCityPos(_v123._0),
                       getCityPos(_v123._1))};}
             _E.Case($moduleName,
-            "on line 110, column 22 to 63");
+            "on line 124, column 22 to 63");
          }();
       };
       return List.map(find)(roads);
@@ -821,7 +852,7 @@ Elm.Main.make = function (_elm) {
                     _v127._1,
                     p);}
                _E.Case($moduleName,
-               "on line 141, column 23 to 36");
+               "on line 155, column 23 to 36");
             }();
          };
          var matches = List.filter(f)(stopPositions);
@@ -835,7 +866,7 @@ Elm.Main.make = function (_elm) {
                case "[]":
                return Maybe.Nothing;}
             _E.Case($moduleName,
-            "between lines 143 and 145");
+            "between lines 157 and 159");
          }();
       }();
    };
@@ -849,7 +880,7 @@ Elm.Main.make = function (_elm) {
                case "Nothing":
                return Maybe.Nothing;}
             _E.Case($moduleName,
-            "between lines 165 and 167");
+            "between lines 179 and 181");
          }();
       }();
    };
@@ -892,7 +923,7 @@ Elm.Main.make = function (_elm) {
                               ,_1: toChange};
                     }();}
                _E.Case($moduleName,
-               "between lines 291 and 299");
+               "between lines 305 and 313");
             }();
          };
          var accumulation = F2(function (_v142,
@@ -918,7 +949,7 @@ Elm.Main.make = function (_elm) {
                        prevUnitsOf(_v142._0) + fromChange)(dict));
                     }();}
                _E.Case($moduleName,
-               "between lines 301 and 304");
+               "between lines 315 and 318");
             }();
          });
          var unitsToAddDict = A3(List.foldl,
@@ -944,7 +975,7 @@ Elm.Main.make = function (_elm) {
                          ,_1: _N.cmp(_v146._1,
                          0) > 0 ? _v146._1 : 0};}
                _E.Case($moduleName,
-               "on line 312, column 26 to 51");
+               "on line 326, column 26 to 51");
             }();
          })(List.map(newUnits)(Dict.keys(units))));
       }();
@@ -1069,7 +1100,7 @@ Elm.Main.make = function (_elm) {
                                                centers)});
               }();}
          _E.Case($moduleName,
-         "between lines 428 and 452");
+         "between lines 442 and 466");
       }();
    });
    var Source = {ctor: "Source"};
@@ -1089,7 +1120,7 @@ Elm.Main.make = function (_elm) {
                case "Source":
                return srcSelectPaint;}
             _E.Case($moduleName,
-            "between lines 458 and 461");
+            "between lines 472 and 475");
          }();
          return Graphics.Collage.move({ctor: "_Tuple2"
                                       ,_0: position.x
@@ -1115,7 +1146,7 @@ Elm.Main.make = function (_elm) {
                  cityId) ? Source : None;
                case "Nothing": return None;}
             _E.Case($moduleName,
-            "between lines 477 and 482");
+            "between lines 491 and 496");
          }();
          var position = getCityPos(cityId);
          var owner = A2(Dict.findWithDefault,
@@ -1146,8 +1177,8 @@ Elm.Main.make = function (_elm) {
                return A2(transformElement,
                  _v163._0,
                  _v163._1)(A2(Graphics.Collage.collage,
-                 900,
-                 600)({ctor: "::"
+                 1200,
+                 800)({ctor: "::"
                       ,_0: roadsForm
                       ,_1: _L.append(A3(drawCities,
                       _v164.units,
@@ -1161,7 +1192,7 @@ Elm.Main.make = function (_elm) {
                       _L.append(_v164.userArrows,
                       _v164.aiArrows)))}));}
             _E.Case($moduleName,
-            "between lines 496 and 499");
+            "between lines 510 and 513");
          }();
       }();
    });
