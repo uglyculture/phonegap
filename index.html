@@ -1,1311 +1,192 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="UTF-8"><title>msgame_v5.2</title><script type="text/javascript" src="elm-runtime.js"></script><script type="text/javascript">Elm.Main = Elm.Main || {};
+<html><head><meta charset="UTF-8"><title>fields2</title><script type="text/javascript" src="elm-runtime.js"></script><script type="text/javascript">Elm.Main = Elm.Main || {};
 Elm.Main.make = function (_elm) {
+   "use strict";
    _elm.Main = _elm.Main || {};
    if (_elm.Main.values)
    return _elm.Main.values;
-   var N = Elm.Native,
-   _N = N.Utils.make(_elm),
-   _L = N.List.make(_elm),
-   _E = N.Error.make(_elm),
-   _J = N.JavaScript.make(_elm),
+   var _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   _E = _N.Error.make(_elm),
+   _J = _N.JavaScript.make(_elm),
    $moduleName = "Main";
-   var Text = Elm.Text.make(_elm);
-   var Text = Elm.Text.make(_elm);
    var Basics = Elm.Basics.make(_elm);
-   var Signal = Elm.Signal.make(_elm);
-   var List = Elm.List.make(_elm);
-   var Maybe = Elm.Maybe.make(_elm);
-   var Time = Elm.Time.make(_elm);
-   var Prelude = Elm.Prelude.make(_elm);
-   var Graphics = Graphics || {};
-   Graphics.Element = Elm.Graphics.Element.make(_elm);
+   var Char = Elm.Char.make(_elm);
    var Color = Elm.Color.make(_elm);
    var Graphics = Graphics || {};
    Graphics.Collage = Elm.Graphics.Collage.make(_elm);
-   var Keyboard = Elm.Keyboard.make(_elm);
+   var Graphics = Graphics || {};
+   Graphics.Element = Elm.Graphics.Element.make(_elm);
+   var Graphics = Graphics || {};
+   Graphics.Input = Elm.Graphics.Input.make(_elm);
+   var Graphics = Graphics || {};
+   Graphics.Input = Graphics.Input || {};
+   Graphics.Input.Field = Elm.Graphics.Input.Field.make(_elm);
+   var Http = Elm.Http.make(_elm);
+   var List = Elm.List.make(_elm);
+   var Maybe = Elm.Maybe.make(_elm);
+   var Native = Native || {};
+   Native.Ports = Elm.Native.Ports.make(_elm);
+   var Signal = Elm.Signal.make(_elm);
+   var String = Elm.String.make(_elm);
+   var Text = Elm.Text.make(_elm);
+   var Time = Elm.Time.make(_elm);
    var Window = Elm.Window.make(_elm);
-   var Touch = Elm.Touch.make(_elm);
-   var Dict = Elm.Dict.make(_elm);
-   var Transform2D = Elm.Transform2D.make(_elm);
    var _op = {};
-   var userFaction = 1;
-   var unitGeneration = 7.0e-3;
-   var transparentPaint = Graphics.Collage.filled(A4(Color.rgba,
-   0,
-   0,
-   0,
-   0));
-   var transformP = F3(function (w,
-   h,
-   _v0) {
+   var extractFloat = function (content) {
       return function () {
-         return {_: {}
-                ,x: _v0.x - Basics.toFloat(w) / 2
-                ,y: Basics.toFloat(h) / 2 - _v0.y};
+         var s = content.string;
+         return _U.cmp(String.length(s),
+         0) > 0 ? String.toFloat(s) : Maybe.Nothing;
+      }();
+   };
+   var truncFloat = F2(function (nDigits,
+   f) {
+      return function () {
+         var ex = Basics.toFloat(Math.pow(10,
+         nDigits));
+         return Basics.toFloat(Basics.round(f * ex)) / ex;
       }();
    });
-   var toMyTouch = function (t) {
-      return {_: {}
-             ,dst: {_: {}
-                   ,x: Basics.toFloat(t.x)
-                   ,y: Basics.toFloat(t.y)}
-             ,src: {_: {}
-                   ,x: Basics.toFloat(t.x0)
-                   ,y: Basics.toFloat(t.y0)}};
-   };
-   var stepUserArrows = F5(function (arrows,
-   prevSelCity,
-   newSelCity,
-   stopCommand,
-   cityOwners) {
+   var concK2S2O5 = 0.576;
+   var calcGramToAdd = F2(function (maybeVol,
+   maybePpm) {
       return function () {
-         var removeStartingBy = function (a1) {
-            return List.filter(function (_v2) {
-               return function () {
-                  switch (_v2.ctor)
-                  {case "_Tuple2":
-                     return Basics.not(_N.eq(a1,
-                       _v2._0));}
-                  _E.Case($moduleName,
-                  "on line 268, column 49 to 62");
-               }();
-            });
-         };
-         var remove = function (a) {
-            return List.filter(function (b) {
-               return Basics.not(_N.eq(a,
-               b));
-            });
-         };
-         var isUserCity = function (c) {
-            return _N.eq(A2(Dict.findWithDefault,
-            0,
-            c)(cityOwners),
-            userFaction);
-         };
-         var removeAIArrows = List.filter(function (_v6) {
-            return function () {
-               switch (_v6.ctor)
-               {case "_Tuple2":
-                  return isUserCity(_v6._0);}
-               _E.Case($moduleName,
-               "on line 281, column 28 to 40");
-            }();
-         });
-         var sendCommand = function () {
-            var _v10 = {ctor: "_Tuple2"
-                       ,_0: prevSelCity
-                       ,_1: newSelCity};
-            switch (_v10.ctor)
-            {case "_Tuple2":
-               switch (_v10._0.ctor)
-                 {case "Just":
-                    switch (_v10._1.ctor)
-                      {case "Just":
-                         return _N.eq(_v10._0._0,
-                           _v10._1._0) || Basics.not(isUserCity(_v10._0._0)) ? Maybe.Nothing : Maybe.Just({ctor: "_Tuple2"
-                                                                                                          ,_0: _v10._0._0
-                                                                                                          ,_1: _v10._1._0});}
-                      break;}
-                 break;}
-            return Maybe.Nothing;
-         }();
-         var applyStop = function () {
-            switch (stopCommand.ctor)
-            {case "Just":
-               switch (stopCommand._0.ctor)
-                 {case "_Tuple2":
-                    return isUserCity(stopCommand._0._0) ? function ($) {
-                         return remove({ctor: "_Tuple2"
-                                       ,_0: stopCommand._0._0
-                                       ,_1: stopCommand._0._1})(remove({ctor: "_Tuple2"
-                                                                       ,_0: stopCommand._0._1
-                                                                       ,_1: stopCommand._0._0})($));
-                      } : Basics.id;}
-                 break;
-               case "Nothing":
-               return Basics.id;}
-            _E.Case($moduleName,
-            "between lines 275 and 280");
-         }();
-         var applyCommand = function () {
-            switch (sendCommand.ctor)
-            {case "Just":
-               switch (sendCommand._0.ctor)
-                 {case "_Tuple2":
-                    return function ($) {
-                         return F2(function (x,y) {
-                            return {ctor: "::"
-                                   ,_0: x
-                                   ,_1: y};
-                         })({ctor: "_Tuple2"
-                            ,_0: sendCommand._0._0
-                            ,_1: sendCommand._0._1})(removeStartingBy(sendCommand._0._0)(remove({ctor: "_Tuple2"
-                                                                                                ,_0: sendCommand._0._1
-                                                                                                ,_1: sendCommand._0._0})($)));
-                      };}
-                 break;
-               case "Nothing":
-               return Basics.id;}
-            _E.Case($moduleName,
-            "between lines 271 and 274");
-         }();
-         return removeAIArrows(applyStop(applyCommand(arrows)));
-      }();
-   });
-   var sqr = function (a) {
-      return a * a;
-   };
-   var selectorSize = 1.8;
-   var safeHead = function (xs) {
-      return function () {
-         switch (xs.ctor)
-         {case "::":
-            return Maybe.Just(xs._0);
-            case "[]":
-            return Maybe.Nothing;}
-         _E.Case($moduleName,
-         "between lines 135 and 137");
-      }();
-   };
-   var roads = _J.toList([{ctor: "_Tuple2"
-                          ,_0: 1
-                          ,_1: 2}
-                         ,{ctor: "_Tuple2",_0: 2,_1: 3}
-                         ,{ctor: "_Tuple2",_0: 1,_1: 4}
-                         ,{ctor: "_Tuple2",_0: 3,_1: 6}
-                         ,{ctor: "_Tuple2",_0: 4,_1: 5}
-                         ,{ctor: "_Tuple2",_0: 5,_1: 6}
-                         ,{ctor: "_Tuple2",_0: 4,_1: 7}
-                         ,{ctor: "_Tuple2",_0: 7,_1: 8}
-                         ,{ctor: "_Tuple2"
-                          ,_0: 6
-                          ,_1: 8}]);
-   var roadExists = function (_v26) {
-      return function () {
-         switch (_v26.ctor)
+         var _v0 = {ctor: "_Tuple2"
+                   ,_0: maybeVol
+                   ,_1: maybePpm};
+         switch (_v0.ctor)
          {case "_Tuple2":
-            return function () {
-                 var f = F2(function (_v30,
-                 alreadyFound) {
-                    return function () {
-                       switch (_v30.ctor)
-                       {case "_Tuple2":
-                          return alreadyFound || (_N.eq({ctor: "_Tuple2"
-                                                        ,_0: _v26._0
-                                                        ,_1: _v26._1},
-                            {ctor: "_Tuple2"
-                            ,_0: _v30._0
-                            ,_1: _v30._1}) || _N.eq({ctor: "_Tuple2"
-                                                    ,_0: _v26._0
-                                                    ,_1: _v26._1},
-                            {ctor: "_Tuple2"
-                            ,_0: _v30._1
-                            ,_1: _v30._0}));}
-                       _E.Case($moduleName,
-                       "between lines 162 and 164");
-                    }();
-                 });
-                 return A3(List.foldl,
-                 f,
-                 false,
-                 roads);
-              }();}
-         _E.Case($moduleName,
-         "between lines 162 and 165");
-      }();
-   };
-   var neighbours = function () {
-      var start = Dict.empty;
-      var insert = F3(function (a,
-      b,
-      dict) {
-         return A2(Dict.insert,
-         a,
-         F2(function (x,y) {
-            return {ctor: "::"
-                   ,_0: x
-                   ,_1: y};
-         })(b)(A2(Dict.findWithDefault,
-         _J.toList([]),
-         a)(dict)))(dict);
-      });
-      var acc = F2(function (_v34,
-      dict) {
-         return function () {
-            switch (_v34.ctor)
-            {case "_Tuple2":
-               return A2(insert,
-                 _v34._1,
-                 _v34._0)(A2(insert,
-                 _v34._0,
-                 _v34._1)(dict));}
-            _E.Case($moduleName,
-            "between lines 114 and 115");
-         }();
-      });
-      return A3(List.foldl,
-      acc,
-      start,
-      roads);
-   }();
-   var neighboursOf = function (city) {
-      return A2(Dict.findWithDefault,
-      _J.toList([]),
-      city)(neighbours);
-   };
-   var mulP = F2(function (c,p) {
-      return {_: {}
-             ,x: p.x * c
-             ,y: p.y * c};
-   });
-   var moveRatio = 5.0e-3;
-   var modF = F2(function (x,y) {
-      return x - Basics.toFloat(Basics.floor(x / y)) * y;
-   });
-   var findMin = F2(function (f,
-   list) {
-      return function () {
-         var first = List.head(list);
-         var start = {ctor: "_Tuple2"
-                     ,_0: first
-                     ,_1: f(first)};
-         var acc = F2(function (currentE,
-         _v38) {
-            return function () {
-               switch (_v38.ctor)
-               {case "_Tuple2":
-                  return function () {
-                       var currentV = f(currentE);
-                       return _N.cmp(currentV,
-                       _v38._1) < 0 ? {ctor: "_Tuple2"
-                                      ,_0: currentE
-                                      ,_1: currentV} : {ctor: "_Tuple2"
-                                                       ,_0: _v38._0
-                                                       ,_1: _v38._1};
-                    }();}
-               _E.Case($moduleName,
-               "between lines 220 and 223");
-            }();
-         });
-         return function (_v42) {
-            return function () {
-               switch (_v42.ctor)
-               {case "_Tuple2":
-                  return _v42._0;}
-               _E.Case($moduleName,
-               "on line 226, column 62 to 66");
-            }();
-         }(A3(List.foldl,
-         acc,
-         {ctor: "_Tuple2"
-         ,_0: List.head(list)
-         ,_1: 100000},
-         list));
+            switch (_v0._0.ctor)
+              {case "Just":
+                 switch (_v0._1.ctor)
+                   {case "Just":
+                      return Maybe.Just(A2(truncFloat,
+                        3,
+                        _v0._0._0 * _v0._1._0 * 1.0e-3 / concK2S2O5));}
+                   break;}
+              break;}
+         return Maybe.Nothing;
       }();
    });
-   var stepAIArrows = F2(function (cityOwners,
-   units) {
-      return function () {
-         var unitsOf = function (c) {
-            return A2(Dict.findWithDefault,
-            0,
-            c)(units);
-         };
-         var ownerOf = function (c) {
-            return A2(Dict.findWithDefault,
-            0,
-            c)(cityOwners);
-         };
-         var arrowForCity = function (city) {
-            return function () {
-               var owner = ownerOf(city);
-               var neighbours = neighboursOf(city);
-               var friends = List.filter(function (a) {
-                  return _N.eq(ownerOf(a),
-                  owner);
-               })(neighbours);
-               var weekestFriend = List.isEmpty(friends) ? Maybe.Nothing : Maybe.Just(findMin(unitsOf)(friends));
-               var needHelp = function () {
-                  switch (weekestFriend.ctor)
-                  {case "Just":
-                     return _N.cmp(unitsOf(weekestFriend._0),
-                       unitsOf(city) * 0.6) < 0;
-                     case "Nothing": return false;}
-                  _E.Case($moduleName,
-                  "between lines 245 and 248");
-               }();
-               var enemies = List.filter(function (a) {
-                  return Basics.not(_N.eq(ownerOf(a),
-                  owner));
-               })(neighbours);
-               var weekestEnemy = List.isEmpty(enemies) ? Maybe.Nothing : Maybe.Just(findMin(unitsOf)(enemies));
-               var canAttack = function () {
-                  switch (weekestEnemy.ctor)
-                  {case "Just":
-                     return _N.cmp(unitsOf(weekestEnemy._0),
-                       unitsOf(city) * 0.7) < 0;
-                     case "Nothing": return false;}
-                  _E.Case($moduleName,
-                  "between lines 248 and 251");
-               }();
-               return function () {
-                  var _v50 = {ctor: "_Tuple4"
-                             ,_0: needHelp
-                             ,_1: canAttack
-                             ,_2: weekestFriend
-                             ,_3: weekestEnemy};
-                  switch (_v50.ctor)
-                  {case "_Tuple4":
-                     switch (_v50._0)
-                       {case false: switch (_v50._1)
-                            {case true:
-                               switch (_v50._3.ctor)
-                                 {case "Just":
-                                    return _J.toList([{ctor: "_Tuple2"
-                                                      ,_0: city
-                                                      ,_1: _v50._3._0}]);}
-                                 break;}
-                            break;
-                          case true: switch (_v50._2.ctor)
-                            {case "Just":
-                               return _J.toList([{ctor: "_Tuple2"
-                                                 ,_0: city
-                                                 ,_1: _v50._2._0}]);}
-                            break;}
-                       break;}
-                  return _J.toList([]);
-               }();
-            }();
-         };
-         var aiCities = List.map(function (_v61) {
-            return function () {
-               switch (_v61.ctor)
-               {case "_Tuple2":
-                  return _v61._0;}
-               _E.Case($moduleName,
-               "on line 233, column 51 to 52");
-            }();
-         })(List.filter(function (_v57) {
-            return function () {
-               switch (_v57.ctor)
-               {case "_Tuple2":
-                  return Basics.not(_N.eq(_v57._1,
-                    userFaction));}
-               _E.Case($moduleName,
-               "on line 232, column 51 to 72");
-            }();
-         })(Dict.toList(cityOwners)));
-         return List.concat(List.map(arrowForCity)(aiCities));
-      }();
+   var field = F3(function (label,
+   handle,
+   content) {
+      return A2(Graphics.Element.flow,
+      Graphics.Element.right,
+      _J.toList([A3(Graphics.Element.container,
+                120,
+                36,
+                Graphics.Element.midRight)(Text.plainText(label))
+                ,A3(Graphics.Element.container,
+                80,
+                36,
+                Graphics.Element.middle)(A2(Graphics.Element.size,
+                40,
+                26)(A5(Graphics.Input.Field.field,
+                Graphics.Input.Field.defaultStyle,
+                handle,
+                Basics.id,
+                "",
+                content)))]));
    });
-   var findMax = F2(function (f,
-   list) {
-      return function () {
-         var first = List.head(list);
-         var start = {ctor: "_Tuple2"
-                     ,_0: first
-                     ,_1: f(first)};
-         var acc = F2(function (currentE,
-         _v65) {
-            return function () {
-               switch (_v65.ctor)
-               {case "_Tuple2":
-                  return function () {
-                       var currentV = f(currentE);
-                       return _N.cmp(currentV,
-                       _v65._1) > 0 ? {ctor: "_Tuple2"
-                                      ,_0: currentE
-                                      ,_1: currentV} : {ctor: "_Tuple2"
-                                                       ,_0: _v65._0
-                                                       ,_1: _v65._1};
-                    }();}
-               _E.Case($moduleName,
-               "between lines 210 and 213");
-            }();
-         });
-         return function (_v69) {
-            return function () {
-               switch (_v69.ctor)
-               {case "_Tuple2":
-                  return _v69._0;}
-               _E.Case($moduleName,
-               "on line 216, column 48 to 52");
-            }();
-         }(A3(List.foldl,
-         acc,
-         start,
-         list));
-      }();
-   });
-   var factionColors = _J.toList([Color.red
-                                 ,Color.green]);
-   var elem = F3(function (n,
-   list,
-   defaultValue) {
-      return function () {
-         switch (list.ctor)
-         {case "::": return _N.eq(n,
-              1) ? list._0 : A3(elem,
-              n - 1,
-              list._1,
-              defaultValue);}
-         return defaultValue;
-      }();
-   });
-   var distance = F2(function (p1,
-   p2) {
-      return Basics.sqrt(sqr(p1.x - p2.x) + sqr(p1.y - p2.y));
-   });
-   var near = F3(function (d,
-   p1,
-   p2) {
-      return _N.cmp(A2(distance,
-      p1,
-      p2),
-      d) < 0;
-   });
-   var delta = A2(Signal._op["<~"],
-   Time.inSeconds,
-   Time.fps(35));
-   var defenderLoss = 3.0e-3;
-   var defaultGame = {_: {}
-                     ,aiArrows: _J.toList([])
-                     ,cityOwners: Dict.fromList(_J.toList([{ctor: "_Tuple2"
-                                                           ,_0: 1
-                                                           ,_1: 1}
-                                                          ,{ctor: "_Tuple2"
-                                                           ,_0: 2
-                                                           ,_1: 1}
-                                                          ,{ctor: "_Tuple2"
-                                                           ,_0: 3
-                                                           ,_1: 1}
-                                                          ,{ctor: "_Tuple2"
-                                                           ,_0: 4
-                                                           ,_1: 1}
-                                                          ,{ctor: "_Tuple2"
-                                                           ,_0: 5
-                                                           ,_1: 2}
-                                                          ,{ctor: "_Tuple2"
-                                                           ,_0: 6
-                                                           ,_1: 2}
-                                                          ,{ctor: "_Tuple2"
-                                                           ,_0: 7
-                                                           ,_1: 2}
-                                                          ,{ctor: "_Tuple2"
-                                                           ,_0: 8
-                                                           ,_1: 2}]))
-                     ,roundCount: 0
-                     ,selectedCity: Maybe.Nothing
-                     ,time: 0
-                     ,units: Dict.fromList(_J.toList([{ctor: "_Tuple2"
-                                                      ,_0: 1
-                                                      ,_1: Basics.toFloat(196)}
-                                                     ,{ctor: "_Tuple2"
-                                                      ,_0: 2
-                                                      ,_1: Basics.toFloat(160)}
-                                                     ,{ctor: "_Tuple2"
-                                                      ,_0: 3
-                                                      ,_1: Basics.toFloat(80)}
-                                                     ,{ctor: "_Tuple2"
-                                                      ,_0: 4
-                                                      ,_1: Basics.toFloat(60)}
-                                                     ,{ctor: "_Tuple2"
-                                                      ,_0: 5
-                                                      ,_1: Basics.toFloat(130)}
-                                                     ,{ctor: "_Tuple2"
-                                                      ,_0: 6
-                                                      ,_1: Basics.toFloat(130)}
-                                                     ,{ctor: "_Tuple2"
-                                                      ,_0: 7
-                                                      ,_1: Basics.toFloat(130)}
-                                                     ,{ctor: "_Tuple2"
-                                                      ,_0: 8
-                                                      ,_1: Basics.toFloat(130)}]))
-                     ,userArrows: _J.toList([])};
-   var createTransform = F2(function (w,
-   h) {
-      return A6(Transform2D.matrix,
-      1,
-      0,
-      0,
-      -1,
-      0 - Basics.toFloat(w) / 2,
-      Basics.toFloat(h) / 2);
-   });
-   var transformElement = F3(function (w,
-   h,
-   element) {
-      return function (el) {
-         return A3(Graphics.Collage.collage,
-         w,
-         h,
-         _J.toList([el]));
-      }(Graphics.Collage.groupTransform(A2(createTransform,
-      w,
-      h))(_J.toList([Graphics.Collage.toForm(element)])));
-   });
-   var colorOfFaction = function (faction) {
-      return A3(elem,
-      faction,
-      factionColors,
-      Color.black);
-   };
-   var cityPositions = _J.toList([{ctor: "_Tuple2"
-                                  ,_0: 1
-                                  ,_1: {_: {},x: 150,y: 80}}
-                                 ,{ctor: "_Tuple2"
-                                  ,_0: 2
-                                  ,_1: {_: {},x: 100,y: 200}}
-                                 ,{ctor: "_Tuple2"
-                                  ,_0: 3
-                                  ,_1: {_: {},x: 150,y: 320}}
-                                 ,{ctor: "_Tuple2"
-                                  ,_0: 4
-                                  ,_1: {_: {},x: 300,y: 80}}
-                                 ,{ctor: "_Tuple2"
-                                  ,_0: 5
-                                  ,_1: {_: {},x: 290,y: 200}}
-                                 ,{ctor: "_Tuple2"
-                                  ,_0: 6
-                                  ,_1: {_: {},x: 320,y: 320}}
-                                 ,{ctor: "_Tuple2"
-                                  ,_0: 7
-                                  ,_1: {_: {},x: 450,y: 100}}
-                                 ,{ctor: "_Tuple2"
-                                  ,_0: 8
-                                  ,_1: {_: {},x: 450,y: 280}}]);
-   var getCityPos = function (city) {
-      return function (_v80) {
-         return function () {
-            switch (_v80.ctor)
-            {case "_Tuple2":
-               return _v80._1;}
-            _E.Case($moduleName,
-            "on line 151, column 17 to 18");
-         }();
-      }(List.head(List.filter(function (_v76) {
-         return function () {
-            switch (_v76.ctor)
-            {case "_Tuple2":
-               return _N.eq(_v76._0,city);}
-            _E.Case($moduleName,
-            "on line 149, column 25 to 34");
-         }();
-      })(cityPositions)));
-   };
-   var drawRoad = function (_v84) {
-      return function () {
-         switch (_v84.ctor)
-         {case "_Tuple2":
-            return function () {
-                 var roadColor = A4(Color.rgba,
-                 0,
-                 0,
-                 0,
-                 0.1);
-                 var posB = getCityPos(_v84._1);
-                 var posA = getCityPos(_v84._0);
-                 var line = A2(Graphics.Collage.segment,
-                 {ctor: "_Tuple2"
-                 ,_0: posA.x
-                 ,_1: posA.y},
-                 {ctor: "_Tuple2"
-                 ,_0: posB.x
-                 ,_1: posB.y});
-                 return A2(Graphics.Collage.outlined,
-                 _N.replace([["width",6]
-                            ,["color",roadColor]],
-                 Graphics.Collage.defaultLine),
-                 line);
-              }();}
-         _E.Case($moduleName,
-         "between lines 425 and 430");
-      }();
-   };
-   var roadsForm = Graphics.Collage.group(A2(List.map,
-   drawRoad,
-   roads));
-   var cityIds = Dict.keys(defaultGame.units);
-   var stepCityOwners = F3(function (cityOwners,
-   units,
-   arrows) {
-      return List.all(function (unit) {
-         return _N.cmp(unit,0) > 0;
-      })(Dict.values(units)) ? cityOwners : function () {
-         var ownerOf = function (c) {
-            return A2(Dict.findWithDefault,
-            0,
-            c)(cityOwners);
-         };
-         var newCityOwner = function (city) {
-            return function () {
-               var owner = ownerOf(city);
-               return _N.cmp(A2(Dict.findWithDefault,
-               0,
-               city)(units),
-               0) > 0 ? owner : function () {
-                  var attacks = List.filter(function (_v88) {
-                     return function () {
-                        switch (_v88.ctor)
-                        {case "_Tuple2":
-                           return _N.eq(_v88._1,
-                             city) && Basics.not(_N.eq(ownerOf(_v88._0),
-                             owner));}
-                        _E.Case($moduleName,
-                        "on line 339, column 63 to 99");
-                     }();
-                  })(arrows);
-                  return _N.eq(List.length(attacks),
-                  0) ? owner : function () {
-                     var maxUnits = List.maximum(List.map(function (_v92) {
-                        return function () {
-                           switch (_v92.ctor)
-                           {case "_Tuple2":
-                              return A3(Dict.findWithDefault,
-                                0,
-                                _v92._0,
-                                units);}
-                           _E.Case($moduleName,
-                           "on line 342, column 71 to 101");
-                        }();
-                     })(attacks));
-                     return function (_v100) {
-                        return function () {
-                           switch (_v100.ctor)
-                           {case "_Tuple2":
-                              return ownerOf(_v100._0);}
-                           _E.Case($moduleName,
-                           "on line 346, column 55 to 64");
-                        }();
-                     }(List.head(List.filter(function (_v96) {
-                        return function () {
-                           switch (_v96.ctor)
-                           {case "_Tuple2":
-                              return _N.eq(A3(Dict.findWithDefault,
-                                0,
-                                _v96._0,
-                                units),
-                                maxUnits);}
-                           _E.Case($moduleName,
-                           "on line 344, column 64 to 107");
-                        }();
-                     })(attacks)));
-                  }();
-               }();
-            }();
-         };
-         return Dict.fromList(List.map(function (c) {
-            return {ctor: "_Tuple2"
-                   ,_0: c
-                   ,_1: newCityOwner(c)};
-         })(cityIds));
-      }();
-   });
-   var cityD = 70;
-   var cityR = cityD / 2;
-   var cityNear = function (p) {
-      return function () {
-         var f = function (_v104) {
-            return function () {
-               switch (_v104.ctor)
-               {case "_Tuple2": return A3(near,
-                    cityR,
-                    _v104._1,
-                    p);}
-               _E.Case($moduleName,
-               "on line 169, column 20 to 36");
-            }();
-         };
-         var matches = List.filter(f)(cityPositions);
-         return function () {
-            switch (matches.ctor)
-            {case "::":
-               switch (matches._0.ctor)
-                 {case "_Tuple2":
-                    return Maybe.Just(matches._0._0);}
-                 break;
-               case "[]":
-               return Maybe.Nothing;}
-            _E.Case($moduleName,
-            "between lines 171 and 173");
-         }();
-      }();
-   };
-   var detectEndSelection = function (touches) {
-      return function () {
-         var touch = safeHead(touches);
-         return function () {
-            switch (touch.ctor)
-            {case "Just":
-               return cityNear(touch._0.dst);
-               case "Nothing":
-               return Maybe.Nothing;}
-            _E.Case($moduleName,
-            "between lines 193 and 194");
-         }();
-      }();
-   };
-   var detectStartSelection = function (touches) {
-      return function () {
-         var touch = safeHead(touches);
-         return function () {
-            switch (touch.ctor)
-            {case "Just":
-               return cityNear(touch._0.src);
-               case "Nothing":
-               return Maybe.Nothing;}
-            _E.Case($moduleName,
-            "between lines 186 and 188");
-         }();
-      }();
-   };
-   var stepSelection = F2(function (touches,
-   prevSelection) {
-      return function () {
-         var touching = Basics.not(List.isEmpty(touches));
-         var start = detectStartSelection(touches);
-         var end = detectEndSelection(touches);
-         return function () {
-            var _v117 = {ctor: "_Tuple3"
-                        ,_0: prevSelection
-                        ,_1: end
-                        ,_2: touching};
-            switch (_v117.ctor)
-            {case "_Tuple3":
-               switch (_v117._0.ctor)
-                 {case "Just":
-                    switch (_v117._1.ctor)
-                      {case "Just": switch (_v117._2)
-                           {case true:
-                              return roadExists({ctor: "_Tuple2"
-                                                ,_0: _v117._0._0
-                                                ,_1: _v117._1._0}) ? end : prevSelection;}
-                           break;
-                         case "Nothing":
-                         switch (_v117._2)
-                           {case true:
-                              return prevSelection;}
-                           break;}
-                      break;}
-                 break;}
-            return start;
-         }();
-      }();
-   });
-   var createGrad = F3(function (r,
-   g,
-   b) {
-      return function () {
-         var c = A3(Color.rgba,r,g,b);
-         return Graphics.Collage.gradient(A3(Color.radial,
-         {ctor: "_Tuple2",_0: 0,_1: 0},
-         20,
-         {ctor: "_Tuple2"
-         ,_0: 0
-         ,_1: 0})(cityD / 2 * selectorSize)(_J.toList([{ctor: "_Tuple2"
-                                                       ,_0: 0
-                                                       ,_1: c(0)}
-                                                      ,{ctor: "_Tuple2"
-                                                       ,_0: 0.5
-                                                       ,_1: c(0.5)}
-                                                      ,{ctor: "_Tuple2"
-                                                       ,_0: 1
-                                                       ,_1: c(0)}])));
-      }();
-   });
-   var srcSelectPaint = A3(createGrad,
-   255,
-   1,
-   136);
-   var avg = F2(function (a,b) {
-      return {_: {}
-             ,x: (a.x + b.x) / 2
-             ,y: (a.y + b.y) / 2};
-   });
-   var stopPositions = function () {
-      var find = function (_v123) {
-         return function () {
-            switch (_v123.ctor)
-            {case "_Tuple2":
-               return {ctor: "_Tuple2"
-                      ,_0: {ctor: "_Tuple2"
-                           ,_0: _v123._0
-                           ,_1: _v123._1}
-                      ,_1: A2(avg,
-                      getCityPos(_v123._0),
-                      getCityPos(_v123._1))};}
-            _E.Case($moduleName,
-            "on line 124, column 22 to 63");
-         }();
+   var contentPpm = Graphics.Input.input(Graphics.Input.Field.noContent);
+   var ppm = A2(Signal.lift,
+   extractFloat,
+   contentPpm.signal);
+   var contentVol = Graphics.Input.input(Graphics.Input.Field.noContent);
+   var vol = A2(Signal.lift,
+   extractFloat,
+   contentVol.signal);
+   var gramToAdd = A3(Signal.lift2,
+   calcGramToAdd,
+   vol,
+   ppm);
+   var form = function () {
+      var addG = function (g) {
+         return A2(Graphics.Element.flow,
+         Graphics.Element.right,
+         _J.toList([Text.asText(g)
+                   ,Text.plainText("g")]));
       };
-      return List.map(find)(roads);
+      var result = function (g) {
+         return A2(Graphics.Element.flow,
+         Graphics.Element.right,
+         _J.toList([A3(Graphics.Element.container,
+                   120,
+                   36,
+                   Graphics.Element.midRight)(Text.plainText("K2S2O5:"))
+                   ,A3(Graphics.Element.container,
+                   120,
+                   36,
+                   Graphics.Element.middle)(A2(Graphics.Element.size,
+                   100,
+                   26)(addG(g)))]));
+      };
+      var empty = Text.plainText("");
+      var output = F3(function (currentPPMfieldC,
+      currentVolfieldC,
+      gram) {
+         return Graphics.Element.color(Color.lightGrey)(Graphics.Element.flow(Graphics.Element.down)(_J.toList([A3(Graphics.Element.container,
+                                                                                                               340,
+                                                                                                               60,
+                                                                                                               Graphics.Element.middle)(Text.leftAligned(Text.height(32)(Text.toText("K2S2O5 kalkulátor"))))
+                                                                                                               ,A3(field,
+                                                                                                               "ppm SO2:",
+                                                                                                               contentPpm.handle,
+                                                                                                               currentPPMfieldC)
+                                                                                                               ,A3(field,
+                                                                                                               "Vol. (l):",
+                                                                                                               contentVol.handle,
+                                                                                                               currentVolfieldC)
+                                                                                                               ,A3(Maybe.maybe,
+                                                                                                               empty,
+                                                                                                               result,
+                                                                                                               gram)])));
+      });
+      var msg = Text.plainText("Enter ppm and vol.");
+      return A4(Signal.lift3,
+      output,
+      contentPpm.signal,
+      contentVol.signal,
+      gramToAdd);
    }();
-   var roadNear = function (p) {
+   var scene = F2(function (_v5,
+   form) {
       return function () {
-         var f = function (_v127) {
-            return function () {
-               switch (_v127.ctor)
-               {case "_Tuple2": return A3(near,
-                    30,
-                    _v127._1,
-                    p);}
-               _E.Case($moduleName,
-               "on line 155, column 23 to 36");
-            }();
-         };
-         var matches = List.filter(f)(stopPositions);
-         return function () {
-            switch (matches.ctor)
-            {case "::":
-               switch (matches._0.ctor)
-                 {case "_Tuple2":
-                    return Maybe.Just(matches._0._0);}
-                 break;
-               case "[]":
-               return Maybe.Nothing;}
-            _E.Case($moduleName,
-            "between lines 157 and 159");
-         }();
-      }();
-   };
-   var detectStopCommand = function (touches) {
-      return function () {
-         var touch = safeHead(touches);
-         return function () {
-            switch (touch.ctor)
-            {case "Just":
-               return roadNear(touch._0.dst);
-               case "Nothing":
-               return Maybe.Nothing;}
-            _E.Case($moduleName,
-            "between lines 179 and 181");
-         }();
-      }();
-   };
-   var attackerLoss = 5.0e-3;
-   var stepUnits = F3(function (units,
-   arrows,
-   cityOwners) {
-      return function () {
-         var unitsOf = function (city) {
-            return A3(Dict.findWithDefault,
-            0,
-            city,
-            units);
-         };
-         var start = Dict.empty;
-         var ownerOf = function (city) {
-            return A2(Dict.findWithDefault,
-            0,
-            city)(cityOwners);
-         };
-         var unitChange = function (_v138) {
-            return function () {
-               switch (_v138.ctor)
-               {case "_Tuple2":
-                  return _N.eq(ownerOf(_v138._0),
-                    ownerOf(_v138._1)) ? function () {
-                       var toMove = F2(function (x,
-                       y) {
-                          return x * y;
-                       })(moveRatio)(unitsOf(_v138._0));
-                       return {ctor: "_Tuple2"
-                              ,_0: 0 - toMove
-                              ,_1: toMove};
-                    }() : function () {
-                       var attackerUnits = unitsOf(_v138._0);
-                       var fromChange = (0 - attackerUnits) * attackerLoss;
-                       var toChange = (0 - attackerUnits) * defenderLoss;
-                       return {ctor: "_Tuple2"
-                              ,_0: fromChange
-                              ,_1: toChange};
-                    }();}
-               _E.Case($moduleName,
-               "between lines 305 and 313");
-            }();
-         };
-         var accumulation = F2(function (_v142,
-         dict) {
-            return function () {
-               switch (_v142.ctor)
-               {case "_Tuple2":
-                  return function () {
-                       var prevUnitsOf = function (c) {
-                          return A2(Dict.findWithDefault,
-                          0,
-                          c)(dict);
-                       };
-                       var $ = unitChange({ctor: "_Tuple2"
-                                          ,_0: _v142._0
-                                          ,_1: _v142._1}),
-                       fromChange = $._0,
-                       toChange = $._1;
-                       return A2(Dict.insert,
-                       _v142._1,
-                       prevUnitsOf(_v142._1) + toChange)(A2(Dict.insert,
-                       _v142._0,
-                       prevUnitsOf(_v142._0) + fromChange)(dict));
-                    }();}
-               _E.Case($moduleName,
-               "between lines 315 and 318");
-            }();
-         });
-         var unitsToAddDict = A3(List.foldl,
-         accumulation,
-         start,
-         arrows);
-         var unitsToAdd = function (c) {
-            return A2(Dict.findWithDefault,
-            0,
-            c)(unitsToAddDict);
-         };
-         var newUnits = function (city) {
-            return {ctor: "_Tuple2"
-                   ,_0: city
-                   ,_1: unitsOf(city) + unitsToAdd(city) + unitGeneration};
-         };
-         return Dict.fromList(List.map(function (_v146) {
-            return function () {
-               switch (_v146.ctor)
-               {case "_Tuple2":
-                  return {ctor: "_Tuple2"
-                         ,_0: _v146._0
-                         ,_1: _N.cmp(_v146._1,
-                         0) > 0 ? _v146._1 : 0};}
-               _E.Case($moduleName,
-               "on line 326, column 26 to 51");
-            }();
-         })(List.map(newUnits)(Dict.keys(units))));
-      }();
-   });
-   var stepGame = F2(function (_v150,
-   _v151) {
-      return function () {
-         return function () {
-            return function () {
-               var stepAI = _N.eq(A2(Basics.mod,
-               _v151.roundCount,
-               50),
-               0);
-               var prevSelectedCity = _v151.selectedCity;
-               var newUnits = A3(stepUnits,
-               _v151.units,
-               _L.append(_v151.userArrows,
-               _v151.aiArrows),
-               _v151.cityOwners);
-               var myTouches = A2(List.map,
-               toMyTouch,
-               _v150.touches);
-               var newSelectedCity = A2(stepSelection,
-               myTouches,
-               prevSelectedCity);
-               var stopCommand = Maybe.isNothing(_v151.selectedCity) ? detectStopCommand(myTouches) : Maybe.Nothing;
-               return _N.replace([["userArrows"
-                                  ,A5(stepUserArrows,
-                                  _v151.userArrows,
-                                  prevSelectedCity,
-                                  newSelectedCity,
-                                  stopCommand,
-                                  _v151.cityOwners)]
-                                 ,["aiArrows"
-                                  ,stepAI ? A2(stepAIArrows,
-                                  _v151.cityOwners,
-                                  _v151.units) : _v151.aiArrows]
-                                 ,["selectedCity"
-                                  ,newSelectedCity]
-                                 ,["units",newUnits]
-                                 ,["time"
-                                  ,_v151.time + _v150.delta]
-                                 ,["roundCount"
-                                  ,_v151.roundCount + 1]
-                                 ,["cityOwners"
-                                  ,A3(stepCityOwners,
-                                  _v151.cityOwners,
-                                  newUnits,
-                                  _L.append(_v151.userArrows,
-                                  _v151.aiArrows))]],
-               _v151);
-            }();
-         }();
-      }();
-   });
-   var addP = F2(function (a,b) {
-      return {_: {}
-             ,x: a.x + b.x
-             ,y: a.y + b.y};
-   });
-   var drawArrow2 = F4(function (time,
-   units,
-   cityOwners,
-   _v154) {
-      return function () {
-         switch (_v154.ctor)
+         switch (_v5.ctor)
          {case "_Tuple2":
-            return function () {
-                 var speed = 10;
-                 var s = 15;
-                 var owner = A2(Dict.findWithDefault,
-                 0,
-                 _v154._0)(cityOwners);
-                 var n = 5;
-                 var col = colorOfFaction(owner);
-                 var circleR = Basics.sqrt(A3(Dict.findWithDefault,
-                 0,
-                 _v154._0,
-                 units)) / 3;
-                 var drawPoint = function (_v158) {
-                    return function () {
-                       return Graphics.Collage.move({ctor: "_Tuple2"
-                                                    ,_0: _v158.x
-                                                    ,_1: _v158.y})(Graphics.Collage.filled(col)(Graphics.Collage.circle(circleR)));
-                    }();
-                 };
-                 var b = getCityPos(_v154._1);
-                 var a = getCityPos(_v154._0);
-                 var v = {_: {}
-                         ,x: b.x - a.x
-                         ,y: b.y - a.y};
-                 var l = Basics.sqrt(sqr(v.x) + sqr(v.y));
-                 var d = l / n;
-                 var dir = {_: {}
-                           ,x: v.x / l
-                           ,y: v.y / l};
-                 var mid = A2(addP,
-                 A2(avg,a,b),
-                 A2(mulP,0 - 15,dir));
-                 var tri = Graphics.Collage.filled(col)(Graphics.Collage.polygon(_J.toList([{ctor: "_Tuple2"
-                                                                                            ,_0: mid.x + dir.y * s
-                                                                                            ,_1: mid.y - dir.x * s}
-                                                                                           ,{ctor: "_Tuple2"
-                                                                                            ,_0: mid.x - dir.y * s
-                                                                                            ,_1: mid.y + dir.x * s}
-                                                                                           ,{ctor: "_Tuple2"
-                                                                                            ,_0: mid.x + dir.x * s
-                                                                                            ,_1: mid.y + dir.y * s}])));
-                 var f = function (x) {
-                    return addP(a)(A2(mulP,
-                    x / (n - 1) * (l - d) + A2(modF,
-                    time,
-                    d / speed) * speed,
-                    dir));
-                 };
-                 var centers = List.map(f)(_L.range(0,
-                 n - 1));
-                 return Graphics.Collage.group({ctor: "::"
-                                               ,_0: tri
-                                               ,_1: A2(List.map,
-                                               drawPoint,
-                                               centers)});
-              }();}
+            return Graphics.Element.color(Color.charcoal)(Graphics.Element.flow(Graphics.Element.down)(_J.toList([A2(Graphics.Element.spacer,
+                                                                                                                 _v5._0,
+                                                                                                                 50)
+                                                                                                                 ,A4(Graphics.Element.container,
+                                                                                                                 _v5._0,
+                                                                                                                 _v5._1 - 50,
+                                                                                                                 Graphics.Element.midTop,
+                                                                                                                 form)])));}
          _E.Case($moduleName,
-         "between lines 442 and 466");
+         "between lines 18 and 21");
       }();
    });
-   var Source = {ctor: "Source"};
-   var Point = F2(function (a,b) {
-      return {_: {},x: a,y: b};
-   });
-   var None = {ctor: "None"};
-   var drawCity$ = F4(function (position,
-   units,
-   selection,
-   col) {
-      return function () {
-         var paint = function () {
-            switch (selection.ctor)
-            {case "None":
-               return transparentPaint;
-               case "Source":
-               return srcSelectPaint;}
-            _E.Case($moduleName,
-            "between lines 472 and 475");
-         }();
-         return Graphics.Collage.move({ctor: "_Tuple2"
-                                      ,_0: position.x
-                                      ,_1: position.y})(Graphics.Collage.group(_J.toList([Graphics.Collage.filled(Color.white)(Graphics.Collage.circle(cityR))
-                                                                                         ,Graphics.Collage.outlined(Graphics.Collage.solid(col))(Graphics.Collage.circle(cityR))
-                                                                                         ,Graphics.Collage.filled(col)(Graphics.Collage.circle(Basics.sqrt(units)))
-                                                                                         ,paint(Graphics.Collage.circle(cityR * selectorSize))])));
-      }();
-   });
-   var drawCity = F4(function (units,
-   selected,
-   cityOwners,
-   cityId) {
-      return function () {
-         var units$ = A3(Dict.findWithDefault,
-         0,
-         cityId,
-         units);
-         var selection = function () {
-            switch (selected.ctor)
-            {case "Just":
-               return _N.eq(selected._0,
-                 cityId) ? Source : None;
-               case "Nothing": return None;}
-            _E.Case($moduleName,
-            "between lines 491 and 496");
-         }();
-         var position = getCityPos(cityId);
-         var owner = A2(Dict.findWithDefault,
-         0,
-         cityId)(cityOwners);
-         var col = colorOfFaction(owner);
-         return A4(drawCity$,
-         position,
-         units$,
-         selection,
-         col);
-      }();
-   });
-   var drawCities = F3(function (units,
-   selectedCity,
-   cityOwners) {
-      return List.map(A3(drawCity,
-      units,
-      selectedCity,
-      cityOwners))(cityIds);
-   });
-   var display = F2(function (_v163,
-   _v164) {
-      return function () {
-         return function () {
-            switch (_v163.ctor)
-            {case "_Tuple2":
-               return A2(transformElement,
-                 _v163._0,
-                 _v163._1)(A2(Graphics.Collage.collage,
-                 1200,
-                 800)({ctor: "::"
-                      ,_0: roadsForm
-                      ,_1: _L.append(A3(drawCities,
-                      _v164.units,
-                      _v164.selectedCity,
-                      _v164.cityOwners),
-                      A2(List.map,
-                      A3(drawArrow2,
-                      _v164.time,
-                      _v164.units,
-                      _v164.cityOwners),
-                      _L.append(_v164.userArrows,
-                      _v164.aiArrows)))}));}
-            _E.Case($moduleName,
-            "between lines 510 and 513");
-         }();
-      }();
-   });
-   var MyTouch = F2(function (a,
-   b) {
-      return {_: {},dst: b,src: a};
-   });
-   var Input = F3(function (a,
-   b,
-   c) {
-      return {_: {}
-             ,delta: c
-             ,space: b
-             ,touches: a};
-   });
-   var input = A2(Signal.sampleOn,
-   delta,
-   A2(Signal._op["~"],
-   A2(Signal._op["~"],
+   var main = A2(Signal._op["~"],
    A2(Signal._op["<~"],
-   Input,
-   Touch.touches),
-   Keyboard.space),
-   delta));
-   var gameState = A3(Signal.foldp,
-   stepGame,
-   defaultGame,
-   input);
-   var main = A3(Signal.lift2,
-   display,
-   Window.dimensions,
-   gameState);
-   var Game = F7(function (a,
-   b,
-   c,
-   d,
-   e,
-   f,
-   g) {
-      return {_: {}
-             ,aiArrows: c
-             ,cityOwners: g
-             ,roundCount: f
-             ,selectedCity: d
-             ,time: e
-             ,units: a
-             ,userArrows: b};
-   });
+   scene,
+   Window.dimensions),
+   form);
    _elm.Main.values = {_op: _op
-                      ,delta: delta
-                      ,input: input
-                      ,cityPositions: cityPositions
-                      ,cityIds: cityIds
-                      ,roads: roads
-                      ,factionColors: factionColors
-                      ,userFaction: userFaction
-                      ,defaultGame: defaultGame
-                      ,elem: elem
-                      ,colorOfFaction: colorOfFaction
-                      ,neighbours: neighbours
-                      ,neighboursOf: neighboursOf
-                      ,stopPositions: stopPositions
-                      ,safeHead: safeHead
-                      ,sqr: sqr
-                      ,distance: distance
-                      ,near: near
-                      ,addP: addP
-                      ,mulP: mulP
-                      ,avg: avg
-                      ,getCityPos: getCityPos
-                      ,roadNear: roadNear
-                      ,roadExists: roadExists
-                      ,cityNear: cityNear
-                      ,detectStopCommand: detectStopCommand
-                      ,detectStartSelection: detectStartSelection
-                      ,detectEndSelection: detectEndSelection
-                      ,stepSelection: stepSelection
-                      ,findMax: findMax
-                      ,findMin: findMin
-                      ,stepAIArrows: stepAIArrows
-                      ,stepUserArrows: stepUserArrows
-                      ,toMyTouch: toMyTouch
-                      ,moveRatio: moveRatio
-                      ,unitGeneration: unitGeneration
-                      ,attackerLoss: attackerLoss
-                      ,defenderLoss: defenderLoss
-                      ,stepUnits: stepUnits
-                      ,stepCityOwners: stepCityOwners
-                      ,stepGame: stepGame
-                      ,gameState: gameState
-                      ,srcSelectPaint: srcSelectPaint
-                      ,transparentPaint: transparentPaint
-                      ,selectorSize: selectorSize
-                      ,cityD: cityD
-                      ,cityR: cityR
-                      ,createGrad: createGrad
-                      ,createTransform: createTransform
-                      ,transformP: transformP
-                      ,drawRoad: drawRoad
-                      ,roadsForm: roadsForm
-                      ,modF: modF
-                      ,drawArrow2: drawArrow2
-                      ,drawCity$: drawCity$
-                      ,drawCity: drawCity
-                      ,drawCities: drawCities
-                      ,transformElement: transformElement
-                      ,display: display
                       ,main: main
-                      ,Source: Source
-                      ,None: None
-                      ,Input: Input
-                      ,Point: Point
-                      ,Game: Game
-                      ,MyTouch: MyTouch};
+                      ,scene: scene
+                      ,form: form
+                      ,contentVol: contentVol
+                      ,contentPpm: contentPpm
+                      ,field: field
+                      ,vol: vol
+                      ,ppm: ppm
+                      ,concK2S2O5: concK2S2O5
+                      ,gramToAdd: gramToAdd
+                      ,truncFloat: truncFloat
+                      ,calcGramToAdd: calcGramToAdd
+                      ,extractFloat: extractFloat};
    return _elm.Main.values;
 };</script></head><body><script type="text/javascript">Elm.fullscreen(Elm.Main)</script><noscript></noscript></body></html>
